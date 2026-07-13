@@ -44,6 +44,8 @@ captureButton.addEventListener('click', () => {
   ctx.scale(-1, 1);
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+  canvas.style.display = "block";
+
   snapshot.src = canvas.toDataURL('image/png');
   snapshot.hidden = false;
   video.hidden = true;
