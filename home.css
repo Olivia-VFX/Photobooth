@@ -169,7 +169,7 @@ h1::after {
  content: '';
 }
 
-.viewfinder.flash-overlay {
+.viewfinder .flash-overlay {
  position: absolute;
  inset: 0;
  background: var(--ink);
