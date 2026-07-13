@@ -112,7 +112,7 @@ h1::after {
  z-index: 2;
  display: flex;
  flex-direction: column;
- align-item: center;
+ align-items: center;
  gap: 1.25rem;
 }
 
