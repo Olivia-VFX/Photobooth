@@ -178,7 +178,7 @@ h1::after {
  pointer-events: none;
 }
 
-.viewfinder.flash.flash-overlay {
+.viewfinder.flash .flash-overlay {
  animation: flash-pop 0.4s ease-out;
 }
 
