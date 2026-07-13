@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+ 
+:root {
+  --bg:          #0b0b0f;
+  --ink:         #f3f1ec;
+  --muted:       #9a97a1;
+ 
+  --gel-amber:   #ff9b3d;
+  --gel-magenta: #ff3e7f;
+  --gel-cyan:    #2de0c8;
+ 
+  --font-display: 'Fraunces', serif;
+  --font-body:    'Manrope', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+}
+ 
+* {
+  box-sizing: border-box;
+}
+ 
+html {
+  height: 100%;
+}
+ 
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 18% 20%, color-mix(in srgb, var(--gel-amber) 55%, transparent), transparent 45%),
+    radial-gradient(circle at 82% 15%, color-mix(in srgb, var(--gel-magenta) 50%, transparent), transparent 45%),
+    radial-gradient(circle at 50% 90%, color-mix(in srgb, var(--gel-cyan) 45%, transparent), transparent 50%),
+    /* film grain, generated as an SVG noise data-uri, blended over the gels */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140% 140%, 140% 140%, 140% 140%, 140px 140px;
+  background-blend-mode: normal, normal, normal, overlay;
+  background-position: 0 0, 0 0, 0 0, 0 0;
+  animation: drift 24s ease-in-out infinite alternate;
+}
+ 
+@keyframes drift {
+  to {
+    background-position: -6% 4%, 6% -4%, -4% 6%, 0 0;
+  }
+}
+ 
+/* ---- viewfinder corner brackets (camera framing, purely decorative) --- */
+html::before,
+html::after,
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  width: clamp(28px, 5vw, 48px);
+  height: clamp(28px, 5vw, 48px);
+  border: 2px solid color-mix(in srgb, var(--ink) 45%, transparent);
+  pointer-events: none;
+  z-index: 5;
+}
+html::before { top: 5vw; left: 5vw; border-right: none; border-bottom: none; }
+html::after  { top: 5vw; right: 5vw; border-left: none; border-bottom: none; }
+body::before { bottom: 5vw; left: 5vw; border-right: none; border-top: none; content: ''; }
+body::after  { bottom: 5vw; right: 5vw; border-left: none; border-top: none; }
+ 
+/* ---- wordmark ----------------------------------------------------------- */
+h1 {
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(2.75rem, 9vw, 6rem);
+  line-height: 0.95;
+  z-index: 2;
+}
+ 
+/* eyebrow label, generated so no markup change is needed */
+h1::before {
+  content: 'LIVASCOPE · FILM & VFX';
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: var(--muted);
+  margin-bottom: 1.1rem;
+}
+ 
+/* reel/frame tag under the title */
+h1::after {
+  content: 'REEL 001 — ● REC';
+  display: block;
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 1.1vw, 0.75rem);
+  letter-spacing: 0.2em;
+  color: var(--gel-cyan);
+  margin-top: 1.25rem;
+}
+ 
+/* ---- back-to-portfolio link, styled as a HUD control chip -------------- */
+a {
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.65em 1.2em;
+  border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--bg) 60%, transparent);
+  backdrop-filter: blur(6px);
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+ 
+a::before {
+  content: '←';
+}
+ 
+a:hover,
+a:focus-visible {
+  color: var(--ink);
+  border-color: var(--gel-magenta);
+  transform: translateY(-1px);
+}
+ 
+a:focus-visible {
+  outline: 2px solid var(--gel-cyan);
+  outline-offset: 3px;
+}
+ 
+/* ---- small screens ------------------------------------------------------ */
+@media (max-width: 480px) {
+  html::before, html::after, body::before, body::after {
+    width: 22px;
+    height: 22px;
+  }
+  h1::before { letter-spacing: 0.2em; }
+}
+ 
+/* ---- respect reduced motion --------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  a { transition: none; }
+}
