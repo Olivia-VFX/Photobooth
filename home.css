@@ -52,7 +52,11 @@ body {
     background-position: -6% 4%, 6% -4%, -4% 6%, 0 0;
   }
 }
- 
+
+#open-gallery {
+ border-color: (--gel-cyan);
+}
+
 /* ---- viewfinder corner brackets (camera framing, purely decorative) --- */
 html::before,
 html::after,
