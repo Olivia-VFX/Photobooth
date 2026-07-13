@@ -8,6 +8,8 @@ const canvas = document.getElementById('captureCanvas');
 const captureButton = document.getElementById('capture-btn');
 const retakeButton = document.getElementById('retake-btn');
 
+let currentFilter="none";
+
 
 // Turn on Camera //
 
@@ -44,6 +46,10 @@ captureButton.addEventListener('click', () => {
   ctx.scale(-1, 1);
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+  if(currentFilter !=="none") {
+    snapshot.classList.add(`filter-${currentFilter}`);
+  }
+
   canvas.style.display = "block";
 
   snapshot.src = canvas.toDataURL('image/png');
@@ -68,5 +74,27 @@ retakeButton.addEventListener('click', () => {
   retakeButton.hidden = true;
   captureButton.hidden = false;
 
+});
+
+// Choose Filter //
+
+document.querySelectorAll('.filters .btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentFilter = btn.dataset.filter;
+
+    video.className = "";
+    snapshot.className = "";
+
+    if(currentFilter !== "none") {
+      video.classList.add(`filter-${currentFilter}`);
+      snapshot.classList.add(`filter-${currentFilter}`);
+    }
+
+    if (currentFilter === "camcorder") {
+      document.querySelector('.camcorder-overlay').hidden = false;
+    } else {
+      document.querySelector('.camcorder-overlay').hidden = true;
+    }
+  });
 });
 
