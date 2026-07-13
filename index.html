@@ -9,8 +9,20 @@
   <body>
     <h1>Photobooth</h1>
 
-    <video id="preview" autoplay playsinline></video>
-    <button id="start-camera">Turn on camera!!</button>
+    <div class="stage">
+      <div class="viewfinder" id="viewfinder">
+        <video id="preview" autoplay playsinline></video>
+        <canvas id="captureCanvas"></canvas>
+        <img id="snapshot" alt="Captured photo" hidden>
+        <div calss="flash-overlay"></div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="start-camera">Turn on camera!!</button>
+        <button class="btn" id="capture-btn" hidden>Take Photo!!</button>
+        <button class="btn" id="retake-btn" hidden>Retake Photo</button>
+      </div>
+    </div>
 
     <a href="https://olivia-vfx.github.io/"> Back to Portfolio </a>
 
