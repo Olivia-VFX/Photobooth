@@ -15,12 +15,20 @@
         <canvas id="captureCanvas"></canvas>
         <img id="snapshot" alt="Captured photo" hidden>
         <div class="flash-overlay"></div>
+        <div class="camcorder-overlay" hidden>REC ● 00:00</div>
       </div>
 
       <div class="controls">
         <button class="btn" id="start-camera" >Turn on camera!!</button>
         <button class="btn" id="capture-btn">Take Photo!!</button>
         <button class="btn" id="retake-btn">Retake Photo</button>
+
+        <div class="filters">
+          <button class="btn" data-filter="none">No Filter</button>
+          <button class="btn" data-filter="bw">B+W Film</button>
+          <button class="btn" data-filter="camcorder">Camcorder</button>
+          <button class="btn" data-filter="digicam">Digicam</button>
+          <button class="btn" data-filter="polaroid">Polaroid</button>
       </div>
     </div>
 
