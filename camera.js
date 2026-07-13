@@ -3,7 +3,7 @@ const startButton = document.getElementById('start-camera');
 
 startButton.addEventListener('click', async () => {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: tru: });
+    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     video.srcObject = stream;
 
     startButton.style.display = 'none';
