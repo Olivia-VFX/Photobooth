@@ -15,7 +15,7 @@ startButton.addEventListener('click', async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
     video.srcObject = stream;
-    .play();
+    video.play();
 
     startButton.style.display = 'none';
 
@@ -46,7 +46,7 @@ captureButton.addEventListener('click', () => {
 
   snapshot.src = canvas.toDataURL('image/png');
   snapshot.hidden = false;
-  snapshot.hidden = true;
+  video.hidden = true;
 
   captureButton.hidden = true;
   retakeButton.hidden = false;
