@@ -63,6 +63,8 @@ retakeButton.addEventListener('click', () => {
   snapshot.hidden = true;
   video.hidden = false;
 
+  canvas.style.display = "none";
+
   retakeButton.hidden = true;
   captureButton.hidden = false;
 
