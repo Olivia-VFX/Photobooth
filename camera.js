@@ -63,6 +63,57 @@ captureButton.addEventListener('click', () => {
   setTimeout(() => viewfinder.classList.remove('flash'), 400);
 });
 
+// Gallery //
+
+const gallery = document.getElementById('gallery');
+
+const wrapper = document.createElement('div');
+
+if (currentFilter === "polaroid") {
+  wrapper.className = "polaroid";
+} else {
+  wrapper.className = "photostrip";
+}
+
+const img = document.createElement('img');
+img.src = snapshot.src;
+
+const downloadBtn = document.createElement('button');
+downloadBtn.textContent = "Download";
+downloadBtn.className = "btn";
+downloadBtn.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.href = snapshot.src;
+  link.download = "photobooth.png";
+  link.click();
+});
+
+const shareBtn = document.createElement('button');
+shareBtn.textContent = "Share";
+shareBtn.className = "btn";
+shareBtn.addEventListener('click', async () => {
+  try {
+    const blob = await (await fetch(snapshot.src)).blob();
+    const file = new File([blob], "photobooth.png", { type: blob.type });
+
+    await navigator.share({
+      files: [file],
+      title: "My Photobooth Picture",
+      text: "Check out my photo!"
+    });
+  } catch (err) {
+    alert("Sharing not supported on this device.");
+  }
+});
+
+wrapper.appendChild(img);
+wrapper.appendChild(downloadBtn);
+wrapper.appendChild(shareBtn);
+
+gallery.appendChild(wrapper);
+
+
+
 // Go back to live feed - RETAKE //
 
 retakeButton.addEventListener('click', () => {
