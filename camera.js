@@ -9,6 +9,7 @@ const captureButton = document.getElementById('capture-btn');
 const retakeButton = document.getElementById('retake-btn');
 
 let currentFilter="none";
+let stripMode = false;
 
 
 // Turn on Camera //
@@ -37,6 +38,33 @@ startButton.addEventListener('click', async () => {
 // Capture a Frame from video onto canvas //
 
 captureButton.addEventListener('click', () => {
+  if (!stripMode) {
+    takeSinglePhoto();
+    return;
+  }
+
+  const photos = [];
+
+  for (let i = 0; i < 4; i++) {
+    const imgData = await captureFrame();
+    photos.push(imgData);
+
+    viewfinder.classList.add('flash');
+    await new Promise(r => setTimeout(r, 300));
+    viewfinder.classList.remove('flash');
+
+    await new Promise(r => setTimeout(r, 400));
+  }
+  
+  buildPhotoStrip(photos);
+
+  captureButton.hidden = true;
+  retakeButton.hidden = false;
+});
+
+// Helper Function //
+
+async function captureFrame() {
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
 
@@ -44,24 +72,14 @@ captureButton.addEventListener('click', () => {
 
   ctx.translate(canvas.width, 0);
   ctx.scale(-1, 1);
+
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  if (currentFilter !== "none") {
+  snapshot.classList.add(`filter-${currentFilter}`);
+}
 
-  if(currentFilter !=="none") {
-    snapshot.classList.add(`filter-${currentFilter}`);
-  }
-
-  canvas.style.display = "block";
-
-  snapshot.src = canvas.toDataURL('image/png');
-  snapshot.hidden = false;
-  video.hidden = true;
-
-  captureButton.hidden = true;
-  retakeButton.hidden = false;
-
-  viewfinder.classList.add('flash');
-  setTimeout(() => viewfinder.classList.remove('flash'), 400);
-});
+  return canvas.toDataURL('image/png');
+}
 
 // Gallery //
 
@@ -117,6 +135,59 @@ wrapper.appendChild(shareBtn);
 
 gallery.appendChild(wrapper);
 
+function buildPhotoStrip(photos) {
+  const gallery = document.getElementById('gallery');
+
+  const strip = document.createElement('div');
+  strip.className = "photostrip-4";
+
+  photos.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    strip.appendChild(img);
+  });
+
+  // Download button
+  const downloadBtn = document.createElement('button');
+  downloadBtn.textContent = "Download Strip";
+  downloadBtn.className = "btn";
+  downloadBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.href = strip.firstChild.src;
+    link.download = "photostrip.png";
+    link.click();
+  });
+
+  // Share button
+  const shareBtn = document.createElement('button');
+  shareBtn.textContent = "Share Strip";
+  shareBtn.className = "btn";
+  shareBtn.addEventListener('click', async () => {
+    try {
+      const blob = await (await fetch(strip.firstChild.src)).blob();
+      const file = new File([blob], "photostrip.png", { type: blob.type });
+
+      await navigator.share({
+        files: [file],
+        title: "My Photo Strip",
+        text: "Check out my photobooth strip!"
+      });
+    } catch {
+      alert("Sharing not supported on this device.");
+    }
+  });
+
+  strip.appendChild(downloadBtn);
+  strip.appendChild(shareBtn);
+
+  gallery.appendChild(strip);
+}
+
+// Photo Strip//
+
+document.getElementById('strip-mode').addEventListener('click', () => {
+  stripMode = !stripMode;
+});
 
 
 // Go back to live feed - RETAKE //
