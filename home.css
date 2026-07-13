@@ -31,7 +31,8 @@ body {
   justify-content: center;
   gap: 1.5rem;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   color: var(--ink);
   font-family: var(--font-body);
   background-color: var(--bg);
