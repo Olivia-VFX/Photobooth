@@ -69,6 +69,11 @@ const gallery = document.getElementById('gallery');
 
 const wrapper = document.createElement('div');
 
+document.getElementById('open-gallery').addEventListener('click', () =>{
+  const gallery = document.getElementById('gallery');
+  gallery.scrollIntoView({behaviour: 'smooth'});
+});
+
 if (currentFilter === "polaroid") {
   wrapper.className = "polaroid";
 } else {
