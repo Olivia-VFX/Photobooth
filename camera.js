@@ -1,5 +1,5 @@
 const video = document.getElementById('preview');
-const startButton = document.getElementById('start-camera');
+const startButton = document.getElementById('start-camera'); 
 
 startButton.addEventListener('click', async () => {
   try {
