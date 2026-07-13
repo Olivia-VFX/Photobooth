@@ -262,6 +262,41 @@ h1::after {
  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
 }
 
+/* ---- GALLERY ----- */
+
+.gallery {
+ width: 100%;
+ max-width: 600px;
+ display: flex;
+ flex-direction: column;
+ gap: 1.5rem;
+ margin-top: 2rem;
+}
+
+.polaroid {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  border-bottom: 3rem solid white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.photostrip {
+  background: #111;
+  padding: 0.5rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 4px;
+}
+
  
 /* ---- back-to-portfolio link, styled as a HUD control chip -------------- */
 a {
