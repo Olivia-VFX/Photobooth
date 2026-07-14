@@ -269,8 +269,8 @@ h1::after {
  width: 100%;
  max-width: 600px;
  display: flex;
- flex-direction: column;
- gap: 1.5rem;
+ flex-wrap: wrap;
+ gap: 10px;
  margin-top: 2rem;
 }
 
@@ -293,9 +293,9 @@ h1::after {
   overflow-x: auto;
 }
 
-.gallery img {
-  width: 100%;
-  border-radius: 4px;
+.gallery-item img {
+ width: 150px;
+ border-radius: 6px;
 }
 
 /* --- Photostrip ---- */
@@ -307,13 +307,13 @@ h1::after {
   box-shadow: 0 10px 20px rgba(0,0,0,0.4);
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 8px;
   width: min(90vw, 300px);
   margin: 0 auto;
 }
 
 .photostrip-4 img {
-  width: 100%;
+  width: 120px;
   border-radius: 4px;
 }
  
