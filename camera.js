@@ -11,23 +11,6 @@ const retakeButton = document.getElementById('retake-btn');
 let currentFilter="none";
 let stripMode = false;
 
-// Get Camera etc //
-
-document.addEventListener("DOMContentLoaded", () => {
-    const startButton = document.getElementById("start-camera");
-    const video = document.getElementById("preview");
-
-    startButton.addEventListener("click", async () => {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-            video.srcObject = stream;
-        } catch (err) {
-            alert("Camera access blocked or unavailable.");
-            console.error(err);
-        }
-    });
-});
-
 // Turn on Camera //
 
 startButton.addEventListener('click', async () => {
@@ -53,7 +36,7 @@ startButton.addEventListener('click', async () => {
 
 // Capture a Frame from video onto canvas //
 
-captureButton.addEventListener('click', () => {
+captureButton.addEventListener('click', async () => {
   if (!stripMode) {
     takeSinglePhoto();
     return;
@@ -105,7 +88,7 @@ const wrapper = document.createElement('div');
 
 document.getElementById('open-gallery').addEventListener('click', () =>{
   const gallery = document.getElementById('gallery');
-  gallery.scrollIntoView({behaviour: 'smooth'});
+  gallery.scrollIntoView({behavior: 'smooth'});
 });
 
 if (currentFilter === "polaroid") {
