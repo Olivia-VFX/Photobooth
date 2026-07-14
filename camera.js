@@ -45,16 +45,17 @@ captureButton.addEventListener('click', async () => {
   const photos = [];
 
   for (let i = 0; i < 4; i++) {
-    const imgData = await captureFrame();
-    photos.push(imgData);
 
     viewfinder.classList.add('flash');
     await new Promise(r => setTimeout(r, 300));
     viewfinder.classList.remove('flash');
 
-    await new Promise(r => setTimeout(r, 400));
+    const imgData = await captureFrame();
+    photos.push(imgData);
+
+    await new Promise(r => setTimeout(r, 4000));
   }
-  
+
   buildPhotoStrip(photos);
 
   captureButton.hidden = true;
@@ -78,6 +79,26 @@ async function captureFrame() {
 }
 
   return canvas.toDataURL('image/png');
+}
+
+function takeSinglePhoto() {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+
+  const ctx = canvas.getContext('2d');
+
+  ctx.translate(canvas.width, 0);
+  ctx.scale(-1, 1);
+
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  const imgData = canvas.toDataURL('image/png');
+
+  snapshot.src = imgData;
+  snapshot.hidden = false;
+  video.hidden = true;
+
+  addPhotoToGallery(imgData);
 }
 
 // Gallery //
@@ -145,6 +166,19 @@ function buildPhotoStrip(photos) {
     img.src = src;
     strip.appendChild(img);
   });
+
+  function addPhotoToGallery(imgSrc) {
+  const gallery = document.getElementById('gallery');
+
+  const wrapper = document.createElement('div');
+  wrapper.className = "gallery-item";
+
+  const img = document.createElement('img');
+  img.src = imgSrc;
+
+  wrapper.appendChild(img);
+  gallery.appendChild(wrapper);
+}
 
   // Download button
   const downloadBtn = document.createElement('button');
