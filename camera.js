@@ -11,6 +11,22 @@ const retakeButton = document.getElementById('retake-btn');
 let currentFilter="none";
 let stripMode = false;
 
+// Get Camera etc //
+
+document.addEventListener("DOMContentLoaded", () => {
+    const startButton = document.getElementById("start-camera");
+    const video = document.getElementById("preview");
+
+    startButton.addEventListener("click", async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+            video.srcObject = stream;
+        } catch (err) {
+            alert("Camera access blocked or unavailable.");
+            console.error(err);
+        }
+    });
+});
 
 // Turn on Camera //
 
