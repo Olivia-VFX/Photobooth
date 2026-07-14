@@ -1,17 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
  
 :root {
-  --bg:          #0b0b0f;
-  --ink:         #f3f1ec;
-  --muted:       #9a97a1;
- 
-  --gel-amber:   #ff9b3d;
-  --gel-magenta: #ff3e7f;
-  --gel-cyan:    #2de0c8;
- 
-  --font-display: 'Fraunces', serif;
-  --font-body:    'Manrope', sans-serif;
-  --font-mono:    'JetBrains Mono', monospace;
+  --paper: #f7f2e9;
+  --ink: #1a1a1a;
+  --accent-blue: #4c6ef5;
+  --accent-gold: #f7c948;
+  --accent-pink: #ff6b9c;
 }
  
 * {
@@ -23,28 +17,17 @@ html {
 }
  
 body {
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: auto;
-  color: var(--ink);
-  font-family: var(--font-body);
-  background-color: var(--bg);
   background-image:
     radial-gradient(circle at 18% 20%, color-mix(in srgb, var(--gel-amber) 55%, transparent), transparent 45%),
     radial-gradient(circle at 82% 15%, color-mix(in srgb, var(--gel-magenta) 50%, transparent), transparent 45%),
     radial-gradient(circle at 50% 90%, color-mix(in srgb, var(--gel-cyan) 45%, transparent), transparent 50%),
     /* film grain, generated as an SVG noise data-uri, blended over the gels */
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 140% 140%, 140% 140%, 140% 140%, 140px 140px;
-  background-blend-mode: normal, normal, normal, overlay;
-  background-position: 0 0, 0 0, 0 0, 0 0;
-  animation: drift 24s ease-in-out infinite alternate;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Futura', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
 }
  
 @keyframes drift {
@@ -54,7 +37,7 @@ body {
 }
 
 #open-gallery {
- border-color: (--gel-cyan);
+ border-color: (--accent-pink);
 }
 
 /* ---- viewfinder corner brackets (camera framing, purely decorative) --- */
@@ -77,30 +60,27 @@ body::after  { bottom: 5vw; right: 5vw; border-left: none; border-top: none; }
  
 /* ---- wordmark ----------------------------------------------------------- */
 h1 {
-  margin: 0;
-  text-align: center;
-  font-family: var(--font-display);
-  font-optical-sizing: auto;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  font-size: clamp(2.75rem, 9vw, 6rem);
-  line-height: 0.95;
-  z-index: 10;
   position: sticky;
- top: 0;
- background: (--bg);
- padding: 10px;
+  top: 0;
+  z-index: 20;
+  background: var(--paper);
+  padding: 14px 24px;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--accent-blue);
+}
 }
  
 /* eyebrow label, generated so no markup change is needed */
 h1::before {
   content: 'LIVASCOPE · FILM & VFX';
   display: block;
-  font-family: var(--font-mono);
+  font-family: 'Futura', 'Helvetica', sans-serif;
   font-size: clamp(0.65rem, 1.2vw, 0.8rem);
   font-weight: 500;
   letter-spacing: 0.35em;
-  color: var(--muted);
+  color: var(--accent-yellow);
   margin-bottom: 1.1rem;
 }
  
@@ -108,36 +88,36 @@ h1::before {
 h1::after {
   content: 'REEL 001 — ● REC';
   display: block;
-  font-family: var(--font-mono);
+  font-family: 'Futura', 'Helvetica', sans-serif;
   font-size: clamp(0.65rem, 1.1vw, 0.75rem);
   letter-spacing: 0.2em;
-  color: var(--gel-cyan);
+  color: var(--accent-blue);
   margin-top: 1.25rem;
 }
 
 /* ---- camera stage ----------------------------------------------------*/
 .stage {
- z-index: 2;
- display: flex;
- flex-direction: column;
- align-items: center;
- gap: 1.25rem;
- position: relative;
+  position: relative;
+  width: 80%;
+  margin: 40px auto;
+  padding: 20px;
+  border: 4px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper);
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
 }
 
 /* the viewfinder */
 
 .viewfinder {
  position: relative;
- width: min(90vw, 420px);
- aspect-ratio: 3 / 4;
- border-radius: 10px;
- overflow: hidden;
- background: #000;
- border: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
- box-shadow:
- 0 0 0 1px color-mix(in srgb, var(--gel-magenta) 25%, transparent),
-  0 30px 60px -20px rgba(0, 0, 0, 0.7);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 4px solid var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);;
 }
 
 .viewfinder video, 
@@ -168,10 +148,18 @@ h1::after {
  background-size: 22px 100%;
  background-repeat: repeat-x;
  background-position: 8px center;
+ background: url('https://grainy-gradients.vercel.app/noise.svg');
 }
 
 .viewfinder::before { top: 0; }
-.viewfinder::after { bottom: 0; }
+.viewfinder::after {
+ content: "";
+ position: absolute;
+ inset: 0;
+ background: url('https://grainy-gradients.vercel.app/noise.svg');
+ opacity: 0.12;
+ pointer-events: none;
+}
 
 .viewfinder.flash::before,
 .viewfinder.flash::after {
@@ -196,40 +184,38 @@ h1::after {
  100% { opacity: 0; }
 }
 
+#preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 /* ---- controls: capture / retake / start, same chip language as the link */
 .controls {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  gap: 10px;
- position: absolute;
- left: 20px;
- top: 50%;
- transform: translateY(-50%);
- flex-direction: column;
+  flex-direction: column;
+  gap: 14px;
 }
  
 .btn {
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.65em 1.2em;
-  border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  background: color-mix(in srgb, var(--bg) 60%, transparent);
-  backdrop-filter: blur(6px);
+  background: var(--accent-blue);
+  color: var(--paper);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 500;
   cursor: pointer;
-  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
  
 .btn:hover,
 .btn:focus-visible {
-  color: var(--ink);
-  transform: translateY(-1px);
+  color: var(--accent-pink);
+ transform: scale(1.05);
 }
  
 #start-camera:hover, #start-camera:focus-visible { border-color: var(--gel-amber); }
@@ -245,16 +231,20 @@ h1::after {
   display: none;
 }
 
+.photostrip-4 button {
+ align-self: center;
+}
+
 /* --- FILTERS ------ */
 
 .filters {
  position: absolute;
- right: 20px;
+ right: 24px;
  top: 50%;
  transform: translateY(-50%);
  display: flex;
  flex-direction: column;
- gap: 10px;
+ gap: 14px;
 }
 
 .filter-bw {
@@ -269,10 +259,10 @@ h1::after {
  position: absolute;
  top: 10px;
  left: 10px;
- font-family: var(--font-mono);
- font-size: 0.9rem;
- color: red;
- z-index: 5;
+ color: var(--accent-yellow);
+ font-weight: bold;
+ font-size: 18px;
+ text-shadow: 0 0 6px black;
 }
 
 .filter-digicam {
@@ -286,12 +276,10 @@ h1::after {
 /* ---- GALLERY ----- */
 
 .gallery {
- width: 100%;
- max-width: 600px;
- display: flex;
- flex-wrap: wrap;
- gap: 10px;
- margin-top: 2rem;
+  margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .polaroid {
@@ -316,45 +304,35 @@ h1::after {
 .gallery-item img {
  width: 150px;
  border-radius: 6px;
+ object-fit: cover;
 }
 
 /* --- Photostrip ---- */
 
 .photostrip-4 {
-  background: #111;
-  padding: 1rem;
-  border-radius: 6px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.4);
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: min(90vw, 300px);
-  margin: 0 auto;
+  flex-direction: row;
+  gap: 12px;
+  padding: 12px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
 }
 
 .photostrip-4 img {
-  width: 120px;
-  border-radius: 4px;
+  width: 140px;
+  border-radius: 6px;
+ height: auto;
+ object-fit: cover;
 }
  
 /* ---- back-to-portfolio link, styled as a HUD control chip -------------- */
 a {
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.65em 1.2em;
-  border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
-  border-radius: 999px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+ display: inline-block;
+  margin-top: 30px;
+  color: var(--accent-blue);
+  font-weight: 600;
   text-decoration: none;
-  color: var(--muted);
-  background: color-mix(in srgb, var(--bg) 60%, transparent);
-  backdrop-filter: blur(6px);
-  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
 }
  
 a::before {
@@ -363,9 +341,7 @@ a::before {
  
 a:hover,
 a:focus-visible {
-  color: var(--ink);
-  border-color: var(--gel-magenta);
-  transform: translateY(-1px);
+  color: var(--accent-pink);
 }
  
 a:focus-visible {
@@ -374,12 +350,32 @@ a:focus-visible {
 }
  
 /* ---- small screens ------------------------------------------------------ */
-@media (max-width: 480px) {
-  html::before, html::after, body::before, body::after {
-    width: 22px;
-    height: 22px;
+@media (max-width: 700px) {
+  .stage {
+    width: 95%;
+    padding: 10px;
   }
-  h1::before { letter-spacing: 0.2em; }
+
+  .controls,
+  .filters {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .controls {
+    margin-bottom: 10px;
+  }
+
+  .photostrip-4 img {
+    width: 100px;
+  }
+
+  .gallery-item img {
+    width: 120px;
+  }
 }
  
 /* ---- respect reduced motion --------------------------------------------- */
