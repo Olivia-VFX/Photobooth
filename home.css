@@ -35,23 +35,22 @@ body {
  font-family: var(--font-body);
 }
 
-#open-gallery {
- border-color: var(--honey);
-}
-
 /* ---- wordmark ----------------------------------------------------------- */
 h1 {
   position: sticky;
   top: 0;
   z-index: 20;
-  padding: 14px 24px;
+  padding: 20px 24px;
   margin: 0;
- 
   font-weight: 600;
- font-size: x-large;
+ font-size: clamp(2.4rem, 8vw, 4.5rem);
   letter-spacing: 1px;
-  border-bottom: 2px solid var(--red);
+  border-bottom: 4px solid var(--red);
  font-family: var(--font-display);
+ color: var(--yellow);
+ text-alignt: center;
+ background: #1c120c;
+ text-shadow: 0 0 12px color-mix(in srgb, var(--yellow) 60%, transparent);
 }
 
  
@@ -80,6 +79,12 @@ h1::after {
 
 /* ---- camera stage ----------------------------------------------------*/
 .stage {
+ position: relative;
+ width: min(92vw, 620px);
+ margin: 0 auto;
+ padding: 32px;
+ border: 4px solid var(--wooddark);
+ border-radius: 14px;
   background-color: var(--woodpanel);
  background-image: repeating-linear-gradient(
   100deg,
@@ -88,12 +93,15 @@ h1::after {
   transparent 2px,
   transparent 12px
   );
+ box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
 }
 
 /* the viewfinder */
 
 .viewfinder {
  position: relative;
+ width: 100%;
+ aspect-ratio: 3 / 4;
  border: 6px solid var(--wooddark);
  border-radius: 10px;
  overflow: hidden;
@@ -169,6 +177,7 @@ h1::after {
  display: flex;
  flex-direction: column;
  gap: 14px;
+ z-index: 6;
 }
 
 .controls {
@@ -179,6 +188,7 @@ h1::after {
   display: flex;
   flex-direction: column;
   gap: 14px;
+ z-index: 6;
 }
  
 .btn {
@@ -191,6 +201,13 @@ h1::after {
   inset 0 0 4px rgba(0, 0, 0, 0.4),
   0 2px 3px rgba(0, 0, 0, 0.5);
  cursor: pointer;
+ display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  color: var(--wooddark);
  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
@@ -214,6 +231,39 @@ h1::after {
 
 .photostrip-4 button {
  align-self: center;
+}
+
+.output-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+/*Opens gallery*/
+
+.ticket-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.6em 1.2em;
+  border: 2px solid var(--red);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+ 
+.ticket-btn:hover {
+  background: var(--yellow);
+}
+ 
+.ticket-btn:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
 }
 
 /*---Gallery-----*/
