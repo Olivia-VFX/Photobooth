@@ -1,11 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600..900&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Special+Elite&family=Manrope:wght@400;500;600&display=swap');
  
 :root {
-  --vanilla: #fff3b0;
- --gray: #335c67;
- --honey: #e09f3e;
- --red: #9e2a2b;
- --cherry: #540b0e;
+  --woodpanel: #7a4a30;
+ --wooddark: #4a2c1c;
+ --red: #c9402c;
+ --yellow: #f4b942;
+ --orange: #e8823a;
+ --blue: #8fb8d9;
+ --paper: #f7f2e9;
+ --ink: #1a1a1a;
+
+ --font-display: 'Alfa Slab One', cursive;
+ --font-label: 'Special Elite', monospace;
+ --font-body: 'Manrope', sans-serif;
 }
  
 * {
@@ -17,40 +24,21 @@ html {
 }
  
 body {
-  background: var(--vanilla);
-  font-family: 'Courier New', Monospace;
   margin: 0;
-  padding: 0;
-}
- 
-@keyframes drift {
-  to {
-    background-position: -6% 4%, 6% -4%, -4% 6%, 0 0;
-  }
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ background: #1c120c;
+ color: var(--ink);
+ font-family: var(--font-body);
 }
 
 #open-gallery {
  border-color: var(--honey);
 }
 
-/* ---- viewfinder corner brackets (camera framing, purely decorative) --- */
-html::before,
-html::after,
-body::before,
-body::after {
-  content: '';
-  position: fixed;
-  width: clamp(28px, 5vw, 48px);
-  height: clamp(28px, 5vw, 48px);
-  border: 2px solid color-mix(in srgb, var(--gray) 45%, transparent);
-  pointer-events: none;
-  z-index: 5;
-}
-html::before { top: 5vw; left: 5vw; border-right: none; border-bottom: none; }
-html::after  { top: 5vw; right: 5vw; border-left: none; border-bottom: none; }
-body::before { bottom: 5vw; left: 5vw; border-right: none; border-top: none; content: ''; }
-body::after  { bottom: 5vw; right: 5vw; border-left: none; border-top: none; }
- 
 /* ---- wordmark ----------------------------------------------------------- */
 h1 {
   position: sticky;
@@ -62,22 +50,20 @@ h1 {
   font-weight: 600;
  font-size: x-large;
   letter-spacing: 1px;
-  border-bottom: 2px solid var(--cherry);
+  border-bottom: 2px solid var(--red);
+ font-family: var(--font-display);
 }
-}
+
  
 /* eyebrow label, generated so no markup change is needed */
 h1::before {
   content: 'LIVASCOPE · FILM & VFX';
-  display: block;
-  font-family: 'Courier New', Monospace;
+  font-family:var(--font-label);
   font-size: clamp(0.65rem, 1.2vw, 0.8rem);
- display: flex;
- justify-content: center;
+ display: block;
   font-weight: 700;
   letter-spacing: 0.35em;
-  color: var(--gray);
-   background: #DD7E7E;
+  color: var(--yellow);
   margin-bottom: 1.1rem;
 }
  
@@ -85,36 +71,32 @@ h1::before {
 h1::after {
   content: 'REEL 001 — ● REC';
   display: block;
-  font-family: 'Courier New', Monospace;
+  font-family: var(--font-label);
   font-size: clamp(0.65rem, 1.1vw, 0.75rem);
   letter-spacing: 0.2em;
-  color: var(--gray);
+  color: var(--yellow);
   margin-top: 1.25rem;
 }
 
 /* ---- camera stage ----------------------------------------------------*/
 .stage {
-  position: relative;
-  width: 80%;
-  margin: 40px auto;
-  padding: 20px;
-  border: 4px solid var(--cherry);
-  border-radius: 12px;
-  background: var(--vanilla);
-  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  background-color: var(--woodpanel);
+ background-image: repeating-linear-gradient(
+  100deg,
+  var(--wooddark) 0px,
+  var(--wooddark) 2px,
+  transparent 2px,
+  transparent 12px
+  );
 }
 
 /* the viewfinder */
 
 .viewfinder {
  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  border: 4px solid var(--cherry);
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--vanilla);
-  box-shadow: 0 0 20px rgba(0,0,0,0.15);;
+ border: 6px solid var(--wooddark);
+ border-radius: 10px;
+ overflow: hidden;
 }
 
 .viewfinder video, 
@@ -132,25 +114,22 @@ h1::after {
  display: none;
 }
 
-.viewfinder::before,
-.viewfinder::after {
+.viewfinder-frame::before{
  content: '';
  position: absolute;
+ top: -18px;
  left: 0;
  right: 0;
- height: 14px;
- z-index: 3;
- background-color: rgba(0, 0, 0, 0.75);
- background-image: radial-gradient(circle, var(--vanilla) 3px, transparent 3.5px);
- background-size: 22px 100%;
+ height: 12px;
+ background-image: radial-gradient(circle, var(--yellow) 3px, transparent 3.5px);
+ background-size: 24px 100%;
  background-repeat: repeat-x;
- background-position: 8px center;
- background: url('https://grainy-gradients.vercel.app/noise.svg');
+ box-shadow: 0 0 6px 2px var(--yellow);
+ opacity: 0.9;
 }
 
-.viewfinder::before { top: 0; }
 .viewfinder::after {
- content: "";
+ content: '';
  position: absolute;
  inset: 0;
  background: url('https://grainy-gradients.vercel.app/noise.svg');
@@ -158,15 +137,10 @@ h1::after {
  pointer-events: none;
 }
 
-.viewfinder.flash::before,
-.viewfinder.flash::after {
- content: '';
-}
-
 .viewfinder .flash-overlay {
  position: absolute;
  inset: 0;
- background: var(--cherry);
+ background: var(--red);
  opacity: 0;
  z-index: 4;
  pointer-events: none;
@@ -176,16 +150,20 @@ h1::after {
  animation: flash-pop 0.4s ease-out;
 }
 
+.viewfinder.flash::before,
+.viewfinder.flash::after {
+ content: '';
+}
+
+.viewfinder-fram{
+ position: relative;
+}
+
 @keyframes flash-pop {
  0% { opacity: 9; }
  100% { opacity: 0; }
 }
 
-#preview {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
 /* ---- controls: capture / retake / start, same chip language as the link */
 .controls {
