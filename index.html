@@ -9,12 +9,14 @@
     <h1>Photobooth</h1>
 
     <div class="stage">
+      <div class="viewfinder-frame">
       <div class="viewfinder" id="viewfinder">
         <video id="preview" autoplay playsinline></video>
         <canvas id="captureCanvas"></canvas>
         <img id="snapshot" alt="Captured photo" hidden>
         <div class="flash-overlay"></div>
         <div class="camcorder-overlay" hidden>REC ● 00:00</div>
+      </div>
       </div>
       
       <button class="btn" id="open-gallery">Visit Gallery</button>
