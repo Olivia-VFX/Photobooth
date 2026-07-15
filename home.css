@@ -42,7 +42,7 @@ body::after {
   position: fixed;
   width: clamp(28px, 5vw, 48px);
   height: clamp(28px, 5vw, 48px);
-  border: 2px solid color-mix(in srgb, var(--ink) 45%, transparent);
+  border: 2px solid color-mix(in srgb, var(--gray) 45%, transparent);
   pointer-events: none;
   z-index: 5;
 }
@@ -55,11 +55,15 @@ body::after  { bottom: 5vw; right: 5vw; border-left: none; border-top: none; }
 h1 {
   position: sticky;
   top: 0;
+ display: flex;
+ justify-content: center;
   z-index: 20;
-  background: var(--vanilla);
+  background: #DD7E7E;
   padding: 14px 24px;
   margin: 0;
+ 
   font-weight: 600;
+ font-size: x-large;
   letter-spacing: 1px;
   border-bottom: 2px solid var(--cherry);
 }
