@@ -23,9 +23,8 @@ body {
     radial-gradient(circle at 50% 90%, color-mix(in srgb, var(--gel-cyan) 45%, transparent), transparent 50%),
     /* film grain, generated as an SVG noise data-uri, blended over the gels */
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background: var(--paper);
   color: var(--ink);
-  font-family: 'Futura', 'Helvetica', sans-serif;
+  font-family: 'Courier New', Monospace;
   margin: 0;
   padding: 0;
 }
@@ -76,7 +75,7 @@ h1 {
 h1::before {
   content: 'LIVASCOPE · FILM & VFX';
   display: block;
-  font-family: 'Futura', 'Helvetica', sans-serif;
+  font-family: 'Courier New', Monospace;
   font-size: clamp(0.65rem, 1.2vw, 0.8rem);
   font-weight: 500;
   letter-spacing: 0.35em;
@@ -88,7 +87,7 @@ h1::before {
 h1::after {
   content: 'REEL 001 — ● REC';
   display: block;
-  font-family: 'Futura', 'Helvetica', sans-serif;
+  font-family: 'Courier New', Monospace;
   font-size: clamp(0.65rem, 1.1vw, 0.75rem);
   letter-spacing: 0.2em;
   color: var(--accent-blue);
