@@ -55,10 +55,7 @@ body::after  { bottom: 5vw; right: 5vw; border-left: none; border-top: none; }
 h1 {
   position: sticky;
   top: 0;
- display: flex;
- justify-content: center;
   z-index: 20;
-  background: #DD7E7E;
   padding: 14px 24px;
   margin: 0;
  
@@ -75,9 +72,12 @@ h1::before {
   display: block;
   font-family: 'Courier New', Monospace;
   font-size: clamp(0.65rem, 1.2vw, 0.8rem);
-  font-weight: 500;
+ display: flex;
+ justify-content: center;
+  font-weight: 700;
   letter-spacing: 0.35em;
   color: var(--gray);
+   background: #DD7E7E;
   margin-bottom: 1.1rem;
 }
  
