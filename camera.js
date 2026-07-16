@@ -87,9 +87,6 @@ async function captureFrame() {
   ctx.scale(-1, 1);
 
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-  if (currentFilter !== "none") {
-  snapshot.classList.add(`filter-${currentFilter}`);
-}
 
   return canvas.toDataURL('image/png');
 }
@@ -103,6 +100,7 @@ function takeSinglePhoto() {
   ctx.translate(canvas.width, 0);
   ctx.scale(-1, 1);
 
+  applyCurrentFilter(ctx);
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
   const imgData = canvas.toDataURL('image/png');
