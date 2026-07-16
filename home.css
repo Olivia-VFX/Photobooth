@@ -426,6 +426,7 @@ h1::after {
   border: 2px solid var(--wooddark);
   border-radius: 10px;
  align-items: center;
+ box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
 }
 
 .photostrip-4 img {
