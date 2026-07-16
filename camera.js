@@ -109,6 +109,9 @@ function takeSinglePhoto() {
   snapshot.hidden = false;
   video.hidden = true;
 
+  captureButton.hidden = true;
+  retakeButton.hidden = false;
+
   addPhotoToGallery(imgData);
 }
 
