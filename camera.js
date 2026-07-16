@@ -7,9 +7,17 @@ const viewfinder = document.getElementById('viewfinder');
 const canvas = document.getElementById('captureCanvas');
 const captureButton = document.getElementById('capture-btn');
 const retakeButton = document.getElementById('retake-btn');
+const gallery = document.getElementById('gallery');
 
 let currentFilter="none";
 let stripMode = false;
+
+const FILTER_CSS = {
+  bw: 'grayscale(100%) contrast(1.2)',
+  camcorder: 'contrast(1.4) saturate(1.3) brightness(0.9)',
+  digicam: 'contrast(1.3) saturate(1.5) brightness(1.1)',
+  polaroid: 'sepia(0.2) contrast(1.1) brightness(1.05) saturate(1.2)',
+};
 
 // Turn on Camera //
 
@@ -64,6 +72,10 @@ captureButton.addEventListener('click', async () => {
 
 // Helper Function //
 
+function applyCurrentFilter(ctx) {
+  ctx.filter = currentFilter !== "none" ? FILTER_CSS[currentFilter] : "none";
+}
+
 async function captureFrame() {
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
@@ -112,52 +124,49 @@ document.getElementById('open-gallery').addEventListener('click', () =>{
   gallery.scrollIntoView({behavior: 'smooth'});
 });
 
-if (currentFilter === "polaroid") {
+function addPhotoToGallery(imgSrc) {
+  const wrapper = document.createElement('div');
   wrapper.className = "polaroid";
-} else {
-  wrapper.className = "photostrip";
-}
 
-const img = document.createElement('img');
-img.src = snapshot.src;
+  const img = document.createElement('img');
+  img.src = imgSrc;
+  wrapper.appendChild(img);
 
-const downloadBtn = document.createElement('button');
-downloadBtn.textContent = "Download";
-downloadBtn.className = "btn";
-downloadBtn.addEventListener('click', () => {
-  const link = document.createElement('a');
-  link.href = snapshot.src;
-  link.download = "photobooth.png";
-  link.click();
-});
+  const downloadBtn = document.createElement('button');
+  downloadBtn.textContent = "Download";
+  downloadBtn.className = "ticket-btn";
+  downloadBtn.addEventListener('click', () => {
+    const link = document.createElement('a');
+    link.href = imgSrc;
+    link.download = "photobooth.png";
+    link.click();
+  });
 
 const shareBtn = document.createElement('button');
 shareBtn.textContent = "Share";
-shareBtn.className = "btn";
+shareBtn.className = "ticket-btn";
 shareBtn.addEventListener('click', async () => {
   try {
-    const blob = await (await fetch(snapshot.src)).blob();
-    const file = new File([blob], "photobooth.png", { type: blob.type });
+    const blob = await (await fetch(imgSrc)).blob();
+    const file = new Filer([blob], "photobooth.png", { type: blob.type});
 
     await navigator.share({
       files: [file],
       title: "My Photobooth Picture",
       text: "Check out my photo!"
     });
-  } catch (err) {
+  } catch {
     alert("Sharing not supported on this device.");
   }
 });
 
-wrapper.appendChild(img);
-wrapper.appendChild(downloadBtn);
-wrapper.appendChild(shareBtn);
+  wrapper.appendChild(downloadBtn);
+  wrapper.appendChild(shareBtn);
 
-gallery.appendChild(wrapper);
+  gallery.appendChild(wrapper);
+}
 
 function buildPhotoStrip(photos) {
-  const gallery = document.getElementById('gallery');
-
   const strip = document.createElement('div');
   strip.className = "photostrip-4";
 
@@ -167,39 +176,24 @@ function buildPhotoStrip(photos) {
     strip.appendChild(img);
   });
 
-  function addPhotoToGallery(imgSrc) {
-  const gallery = document.getElementById('gallery');
-
-  const wrapper = document.createElement('div');
-  wrapper.className = "gallery-item";
-
-  const img = document.createElement('img');
-  img.src = imgSrc;
-
-  wrapper.appendChild(img);
-  gallery.appendChild(wrapper);
-}
-
-  // Download button
   const downloadBtn = document.createElement('button');
   downloadBtn.textContent = "Download Strip";
-  downloadBtn.className = "btn";
+  downloadBtn.className = "ticket-btn";
   downloadBtn.addEventListener('click', () => {
     const link = document.createElement('a');
     link.href = strip.firstChild.src;
     link.download = "photostrip.png";
     link.click();
   });
-
-  // Share button
+ 
   const shareBtn = document.createElement('button');
   shareBtn.textContent = "Share Strip";
-  shareBtn.className = "btn";
+  shareBtn.className = "ticket-btn";
   shareBtn.addEventListener('click', async () => {
     try {
       const blob = await (await fetch(strip.firstChild.src)).blob();
       const file = new File([blob], "photostrip.png", { type: blob.type });
-
+ 
       await navigator.share({
         files: [file],
         title: "My Photo Strip",
@@ -209,12 +203,13 @@ function buildPhotoStrip(photos) {
       alert("Sharing not supported on this device.");
     }
   });
-
+ 
   strip.appendChild(downloadBtn);
   strip.appendChild(shareBtn);
-
+ 
   gallery.appendChild(strip);
 }
+
 
 // Photo Strip//
 
@@ -250,11 +245,7 @@ document.querySelectorAll('.filters .btn').forEach(btn => {
       snapshot.classList.add(`filter-${currentFilter}`);
     }
 
-    if (currentFilter === "camcorder") {
-      document.querySelector('.camcorder-overlay').hidden = false;
-    } else {
-      document.querySelector('.camcorder-overlay').hidden = true;
-    }
+    document.querySelector('.camcorder-overlay').hidden = currentFilter !== "camcorder";
   });
 });
 
