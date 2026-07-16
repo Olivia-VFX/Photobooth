@@ -410,6 +410,13 @@ h1::after {
   overflow-x: auto;
 }
 
+.photostrip img {
+ width: 220px;
+ height: auto;
+ display: block;
+ border-radius: 4px;
+}
+
 .gallery-item img {
  width: 150px;
  border-radius: 6px;
