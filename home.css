@@ -167,6 +167,36 @@ h1::after {
  100% { opacity: 0; }
 }
 
+/* ------ Curtains -----------------------*/
+
+.curtain {
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ width: 52%;
+ background: linear-gradient(90deg, var(--wooddark), var(--red) 65%, var(--wooddark));
+ z-index: 5;
+ pointer-events: none;
+ transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.curtain-left {
+ left: 0;
+ transform: translateX(0);
+}
+
+.curtain-right {
+ right: 0;
+ transform: translateX(0)'
+}
+
+.viewfinder.camera-on .curtain-left {
+ transform: translateX(-100%);
+}
+
+.viewfinder.camera-on .curtain-right {
+ transform: translateX(100%);
+}
 
 /* ---- controls: capture / retake / start, same chip language as the link */
 .filters {
