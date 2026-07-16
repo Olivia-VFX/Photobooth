@@ -369,6 +369,7 @@ h1::after {
   background: var(--paper);
   border: 2px solid var(--wooddark);
   border-radius: 10px;
+ align-items: center;
 }
 
 .photostrip-4 img {
