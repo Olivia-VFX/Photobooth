@@ -116,8 +116,6 @@ function takeSinglePhoto() {
 
 // Gallery //
 
-const gallery = document.getElementById('gallery');
-
 const wrapper = document.createElement('div');
 
 document.getElementById('open-gallery').addEventListener('click', () =>{
