@@ -27,6 +27,7 @@ startButton.addEventListener('click', async () => {
     video.srcObject = stream;
     video.play();
 
+    viewfinder.classList.add('camera-on');
     startButton.style.display = 'none';
 
   } catch (error) {
